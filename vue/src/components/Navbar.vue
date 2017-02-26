@@ -25,12 +25,13 @@
 <style lang="scss">
   body {
     padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
+    padding-bottom: 1.5rem; 
   }
   
   .header {
     padding-right: 1rem;
     padding-left: 1rem;
+    margin-bottom: 5rem;            
   }
   
   .header {
