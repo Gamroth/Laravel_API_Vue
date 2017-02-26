@@ -14,7 +14,7 @@
                   v-model="password" 
                   placeholder="Password">
         </div>
-        <button class="btn btn-success ml-auto d-flex">Login</button>
+        <button class="btn btn-success ml-auto d-flex" v-on:click="test">Login</button>
       </div>
     </div>
 
@@ -32,6 +32,15 @@
         return {
           email: "",
           password: ""
+        }
+    },
+
+    methods: {
+        test () {
+          this.$http.get("http://localhost:8000/api/test")
+            .then(function(response) {
+              console.log(response);
+            })
         }
     }
   }
