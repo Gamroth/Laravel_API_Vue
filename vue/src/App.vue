@@ -1,21 +1,16 @@
 <template>
   <div id="app">
     <Navbar></Navbar>
-    <Login></Login>
-    <Register></Register>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import Navbar from "./components/Navbar.vue"
-import Login from "./components/authentication/Login.vue"
-import Register from "./components/authentication/Register.vue"
+import Navbar from './components/Navbar.vue'
 
 export default {
   components: {
-    "Navbar": Navbar,
-    "Login": Login,
-    "Register": Register
+    'Navbar': Navbar
   }
 }
 </script>
