@@ -14,7 +14,7 @@
                   v-model="password" 
                   placeholder="Password">
         </div>
-        <button class="btn btn-success ml-auto d-flex" v-on:click="test">Login</button>
+        <button class="btn btn-success ml-auto d-flex" v-on:click="login">Login</button>
       </div>
     </div>
 
@@ -36,11 +36,24 @@
     },
 
     methods: {
-        test () {
-          this.$http.get("http://localhost:8000/api/test")
-            .then(function(response) {
-              console.log(response);
+        login () {
+          var data = {
+            client_id: 2,
+            client_secret: '4TLAZ7FhZp3m6GMFmaUoo8yfmC7NQJs6HdkbkLRu',
+            grant_type: 'password',
+            username: this.email,
+            password: this.password
+          }
+
+          this.$http.post("http://localhost:8000/oauth/token", data)
+            .then(response => {
+              console.log(response)
             })
+
+            // stary sposob
+            // .then(function(response) {
+            //   console.log(response);
+            // })
         }
     }
   }
