@@ -14,7 +14,8 @@
           <a href="#" class="btn btn-primary">Wish list</a>
           <a href="#" class="btn btn-success">Buy</a>
         </p>
-        <p class="card-text d-flex flex-row justify-content-end" v-if="productdata.user_id == authenticatedUser.id">
+        <p class="card-text d-flex flex-row justify-content-between" v-if="productdata.user_id == authenticatedUser.id">
+          <router-link :to="'/products/' + productdata.id +'/edit'" class="btn">Edit</router-link>
           <a href="#" class="btn btn-danger" role="button" @click="$emit('delete-product')">Delete</a>
         </p>
       </div>

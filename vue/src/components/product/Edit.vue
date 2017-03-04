@@ -21,7 +21,7 @@
             </div>
             
             <div class="form-group text-right">
-              <button class="btn btn-success" v-show="product.name && product.price && product.description" @click="create">Create</button>
+              <button class="btn btn-success" v-show="product.name && product.price && product.description" @click="update">Update</button>
             </div>
             
           </div>
@@ -32,23 +32,31 @@
 </template>
 
 <script>
+  import swal from 'sweetalert'
   export default {
+    created () {
+      this.getProduct()  
+    },
+
     data () {
       return {
-        product: {
-          name: '',
-          price: 0,
-          description: ''
-        }
+        product: {}
       }
     },
 
     methods: {
-      create () {
-        this.$http.post('api/products', this.product)
+      getProduct () {
+        this.$http.get('api/products/'+this.$route.params.product_id)
+          .then(response => {
+            this.product = response.body
+          })
+      },
+
+      update () {
+        this.$http.put('api/products/' + this.$route.params.product_id, this.product)
           .then(response => {
             console.log(response)
-            this.$router.push('/feed')
+            swal("Updated!", "Your product has been updated!", "success")
           })
       }
     }
