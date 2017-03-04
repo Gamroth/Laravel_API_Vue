@@ -4,6 +4,7 @@
     <div class="row">
       <my-product 
         v-for="product in products"
+        :authenticatedUser="authenticatedUser"
         :productdata="product">
       
       </my-product>
@@ -19,6 +20,12 @@
     data () {
       return {
         products: []
+      }
+    },
+
+    computed: {
+      authenticatedUser () {
+        return this.$auth.getAuthenticatedUser()
       }
     },
 
