@@ -38,8 +38,18 @@
         product: {
           name: '',
           price: 0,
-          description: ''
+          description: '',
+          user_id: ''
         }
+      }
+    },
+
+    computed: {
+      authenticatedUser () {
+        var user = this.$auth.getAuthenticatedUser()
+        this.product.user_id = user.id
+
+        return user
       }
     },
 
@@ -47,6 +57,7 @@
       create () {
         this.$http.post('api/products', this.product)
           .then(response => {
+            console.log(response)
             this.$router.push('/feed')
           })
       }
