@@ -13,6 +13,9 @@
           <a href="#" class="btn btn-primary">Wish list</a>
           <a href="#" class="btn btn-success">Buy</a>
         </p>
+        <p class="card-text d-flex flex-row justify-content-end" v-if="productdata.user_id == authenticatedUser.id">
+          <a href="#" class="btn btn-danger" role="button" @click="deleteProduct">Delete</a>
+        </p>
       </div>
     </div>
   </div>
@@ -30,8 +33,34 @@
 </style>
 
 <script>
+  import swal from 'sweetalert'
+
   export default {
-    props: ['productdata', 'authenticatedUser']
+    props: ['productdata', 'authenticatedUser'],
+
+    methods: {
+      deleteProduct () {
+        swal({
+            title: "Are you sure?",
+            text: "You will not be able to recover this product!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes, delete it!",
+            closeOnConfirm: false
+          },
+          function () {
+            this.$http.delete('api/products/' + this.productdata.id)
+              .then(response => {
+                console.log(response)
+
+                 swal("Deleted!", "Your product has been deleted.", "success");
+              })
+          }.bind(this)
+        );
+      }
+    }
+
   }
   
 </script>
