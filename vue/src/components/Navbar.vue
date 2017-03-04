@@ -4,13 +4,27 @@
       <nav>
         <ul class="nav nav-pills float-right">
           <li class="nav-item">
-            <a class="nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+            <router-link class="nav-link" to="/login" v-if="!isAuth">
+              Login
+            </router-link>
           </li>
+
           <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
+            <router-link class="nav-link" to="/register" v-if="!isAuth">
+              Register
+            </router-link>
           </li>
+
+           <li class="nav-item">
+            <router-link class="nav-link" to="/feed"  v-if="isAuth">
+              Feed
+            </router-link>
+          </li>
+
           <li class="nav-item">
-            <a class="nav-link" href="#">Contact</a>
+            <router-link class="nav-link" to="/logout" v-if="isAuth">
+              Logout
+            </router-link>
           </li>
         </ul>
       </nav>
@@ -20,6 +34,17 @@
 </template>
 
 <script>
+  export default {
+    data () {
+      return {
+        isAuth: null
+      }
+    },
+
+    created () {
+      this.isAuth = this.$auth.isAuthenticated()
+    }
+  }
 </script>
 
 <style lang="scss">
