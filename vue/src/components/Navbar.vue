@@ -43,7 +43,7 @@
 
     created () {
       this.isAuth = this.$auth.isAuthenticated()
-    }
+    }  
   }
 </script>
 
